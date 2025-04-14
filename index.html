@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人信息采集表 - 鲁东大学</title>
+    <style>
+        body {
+                   font-family: 'Microsoft YaHei', Arial, sans-serif;
+                   line-height: 1.6;
+                   color: #333;
+                   background-color: #f5f5f5;
+                   padding: 20px;
+               }
+               .form-container {
+                   max-width: 1000px;
+                   margin: 0 auto;
+                   background-color: white;
+                   padding: 25px;
+                   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+                   border-radius: 8px;
+               }
+               fieldset {
+                   border: 1px solid #e0e0e0;
+                   margin: 18px 0;
+                   padding: 20px;
+                   border-radius: 6px;
+                   background-color: #fafafa;
+               }
+               legend {
+                   color: #2c3e50;
+                   padding: 0 12px;
+                   font-weight: 600;
+                   font-size: 1.1em;
+                   background: white;
+                   border: 1px solid #e0e0e0;
+                   border-radius: 4px;
+                   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+               }
+               table {
+                   width: 100%;
+                   border-collapse: separate;
+                   border-spacing: 0;
+                   margin: 12px 0;
+               }
+               th, td {
+                   padding: 12px 15px;
+                   border: 1px solid #e0e0e0;
+                   text-align: left;
+                   vertical-align: middle;
+               }
+               th {
+                   background-color: #f8f9fa;
+                   font-weight: 500;
+                   color: #444;
+                   width: 12%;
+                   min-width: 100px;
+               }
+               input, select, textarea {
+                   width: 100%;
+                   padding: 10px;
+                   border: 1px solid #ddd;
+                   border-radius: 4px;
+                   box-sizing: border-box;
+                   font-family: inherit;
+                   font-size: 14px;
+                   transition: border-color 0.3s;
+               }
+               input:focus, select:focus, textarea:focus {
+                   border-color: #4CAF50;
+                   outline: none;
+                   box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+               }
+               input[type="submit"] {
+                   background-color: #4CAF50;
+                   color: white;
+                   cursor: pointer;
+                   padding: 12px 25px;
+                   margin-top: 15px;
+                   font-size: 16px;
+                   border: none;
+                   border-radius: 4px;
+                   transition: background-color 0.3s;
+               }
+               input[type="submit"]:hover {
+                   background-color: #45a049;
+               }
+               .required::after {
+                   content: "*";
+                   color: #e74c3c;
+                   margin-left: 4px;
+               }
+               .photo-upload {
+                   position: relative;
+                   width: 120px;
+                   height: 160px;
+                   margin: 0 auto;
+               }
+               .photo-preview {
+                   width: 100%;
+                   height: 100%;
+                   border: 2px dashed #ccc;
+                   background-color: #f9f9f9;
+                   display: flex;
+                   flex-direction: column;
+                   align-items: center;
+                   justify-content: center;
+                   cursor: pointer;
+                   overflow: hidden;
+                   border-radius: 4px;
+                   transition: border-color 0.3s;
+               }
+               .photo-preview img {
+                   max-width: 100%;
+                   max-height: 100%;
+                   object-fit: cover;
+               }
+               .photo-text {
+                   font-size: 12px;
+                   color: #666;
+                   text-align: center;
+                   margin-top: 8px;
+               }
+               .photo-input {
+                   position: absolute;
+                   width: 100%;
+                   height: 100%;
+                   top: 0;
+                   left: 0;
+                   opacity: 0;
+                   cursor: pointer;
+               }
+               .up {
+                   text-align: center;
+                   margin-top: 20px;
+               }
+               
+               input[type="checkbox"] {
+                   width: auto;
+                   margin-right: 5px;
+                   vertical-align: middle;
+                   transform: scale(1.1);
+               }
+               .checkbox-group {
+                   display: flex;
+                   flex-wrap: wrap;
+                   gap: 8px 15px;
+                   align-items: center;
+               }
+               .checkbox-item {
+                   white-space: nowrap;
+                   display: flex;
+                   align-items: center;
+               }
+               
+               tr:nth-child(even) {
+                   background-color: #f9f9f9;
+               }
+               
+               select {
+                   appearance: none;
+                   background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+                   background-repeat: no-repeat;
+                   background-position: right 10px center;
+                   background-size: 15px;
+                   padding-right: 30px;
+               }
+           </style>
+           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+       </head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="form-container">
+        <form action="#">
+            <fieldset>
+                <legend><i class="fas fa-user"></i> 基本信息</legend>
+                <table>
+                    <tr>
+                        <td width="10%"><label class="required">姓名</label></td>
+                        <td><input type="text" name="name" maxlength="6" required></td>
+                        <td width="10%"><label>性别</label></td>
+                        <td width="15%">
+                            <select name="gender">
+                                <option value="female">女</option>
+                                <option value="male">男</option>
+                            </select>
+                        </td>
+						<td width="8%"><label class="required">年龄</label></td>
+						    <td><input type="number" name="age" min="16" max="60"></td>
+						 <td rowspan="3" width="130px" class="photo-cell">
+						    <div class="photo-upload">
+						        <div class="photo-preview" id="photoPreview">
+						            <i class="fas fa-camera photo-icon"></i>
+						            <div class="photo-text">点击上传照片<br>(120×160像素)</div>
+						        </div>
+						        <input type="file" name="photo" id="photoInput" 
+						                accept="image/*" class="photo-input" 
+						                onchange="previewPhoto(event)">
+						        </div>
+						    </td>
+                    </tr>
+                    <tr>
+                        <td><label>学历</label></td>
+						<td>
+						    <select name="education">
+						        <option value="college">大专</option>
+						        <option value="bachelor">本科</option>
+						        <option value="master">硕士</option>
+						        <option value="doctor">博士</option>
+						    </select>
+						</td>
+                        <td><label>联系电话</label></td>
+                        <td><input type="tel" name="phone" pattern="[0-9]{11}"></td>
+						<td><label class="required">健康状况</label></td>
+						<td>
+						    <select name="health">
+						        <option value="excellent">健康</option>
+						        <option value="good">良好</option>
+						        <option value="normal">一般</option>
+						    </select>
+						</td>
+                    </tr>
+                    <tr>
+                        <td><label>电子邮箱</label></td>
+                        <td><input type="email" name="email"></td>
+                        <td><label>籍贯</label></td>
+                        <td><input type="text" name="hometown"></td>
+						<td><label>专业</label></td>
+						<td>
+						    <select name="education">
+						        <option value="software">软件工程</option>
+						        <option value="message">信息工程</option>
+						        <option value="computer">计算机科学与技术</option>
+						        <option value="electric">电气工程</option>
+						    </select>
+						</td>
+                    </tr>
+					<tr>
+					    <td><label>婚姻状况</label></td>
+					    <td>
+					        <select name="marriage">
+					            <option value="single">未婚</option>
+					            <option value="married">已婚</option>
+					        </select>
+					    </td>
+						<td><label>求职意向</label></td>
+						    <td colspan="2">
+						            <div class="checkbox-group" style="display: flex; flex-wrap: wrap;">
+						                <div class="checkbox-item" style="margin-right: 15px; white-space: nowrap;">
+						                    <input type="checkbox" name="job_intention[]" value="developer"> 开发工程师
+						                </div>
+						                <div class="checkbox-item" style="margin-right: 15px; white-space: nowrap;">
+						                    <input type="checkbox" name="job_intention[]" value="designer"> 设计师
+						                </div>
+						                <div class="checkbox-item" style="margin-right: 15px; white-space: nowrap;">
+						                    <input type="checkbox" name="job_intention[]" value="tester"> 测试工程师
+						                </div>
+						                <div class="checkbox-item" style="white-space: nowrap;">
+						                    <input type="checkbox" name="job_intention[]" value="product"> 产品经理
+						                </div>
+						            </div>
+						        </td>
+						<td><label>毕业院校</label></td>
+						<td>
+						    <select name="education">
+						        <option value="ludong">鲁东大学</option>
+						        <option value="yantai">烟台大学</option>
+						    </select>
+						</td>
+					</tr>
+					
+                </table>
+            </fieldset>
+
+            <fieldset>
+                <legend><i class="fas fa-code"></i> 技能信息</legend>
+                <td colspan="5">
+                    <div class="checkbox-group">
+                        <div class="checkbox-item"><input type="checkbox" name="certificates" value="english4"> 英语四级</div>
+                        <div class="checkbox-item"><input type="checkbox" name="certificates" value="english6"> 英语六级</div>
+                        <div class="checkbox-item"><input type="checkbox" name="certificates" value="computer2"> 计算机二级</div>
+                        <div class="checkbox-item"><input type="checkbox" name="certificates" value="computer3"> 计算机三级</div>
+                        <div class="checkbox-item"><input type="checkbox" name="certificates" value="software"> 软件设计师</div>
+                        <div class="checkbox-item"><input type="checkbox" name="certificates" value="network"> 网络工程师</div>
+                    </div>
+                </td>
+            </fieldset>
+			
+			<fieldset>
+				<legend><i class="fas fa-star icon"></i> 个人特长与爱好</legend>
+				<td colspan="5">
+				    <div class="checkbox-group">
+				        <div class="checkbox-item"><input type="checkbox" name="hobbies" value="basketball"> 篮球</div>
+				        <div class="checkbox-item"><input type="checkbox" name="hobbies" value="football"> 足球</div>
+				        <div class="checkbox-item"><input type="checkbox" name="hobbies" value="music"> 音乐</div>
+				        <div class="checkbox-item"><input type="checkbox" name="hobbies" value="reading"> 阅读</div>
+				        <div class="checkbox-item"><input type="checkbox" name="hobbies" value="travel"> 旅游</div>
+				        <div class="checkbox-item"><input type="checkbox" name="hobbies" value="photography"> 摄影</div>
+				    </div>
+				</td>
+			</fieldset>
+
+            <fieldset>
+                <legend><i class="fas fa-project-diagram"></i> 项目经历</legend>
+                <table>
+                    <tr>
+                        <td colspan="3">
+                            <textarea name="project_desc" rows="4"></textarea>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+			
+			<fieldset>
+				<legend><i class="fas fa-edit icon"></i> 自我评价</legend>
+				<table>
+				    <tr>
+				        <td>
+				            <textarea name="ziwojieshao" rows="6"></textarea>
+				        </td>
+				    </tr>
+				</table>
+			</fieldset>
+
+            <div class="up">
+                <input type="submit" value="提交表单">
+            </div>
+        </form>
+    </div>
+</body>
+</html>
